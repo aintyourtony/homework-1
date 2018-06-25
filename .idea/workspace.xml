@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="deb7e96d-36d2-40bd-a0f0-d2bb0f9e8d39" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/about.php" beforeDir="false" afterPath="$PROJECT_DIR$/about.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -102,16 +100,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529948596926</updated>
-      <workItem from="1529948603721" duration="2751000" />
+      <workItem from="1529948603721" duration="2792000" />
     </task>
+    <task id="LOCAL-00001" summary="homework done">
+      <created>1529951763958</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1529951763958</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2751000" />
+    <option name="totallyTimeSpent" value="2792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="509" y="0" width="960" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3665254" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -139,6 +144,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="homework done" />
+    <option name="LAST_COMMIT_MESSAGE" value="homework done" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/about.php">
