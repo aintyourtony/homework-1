@@ -64,9 +64,4 @@ foreach ($C as $first => $second) {
 
 
 
-
-
-
-
-
 ?>
