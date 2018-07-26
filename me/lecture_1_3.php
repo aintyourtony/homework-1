@@ -7,15 +7,14 @@ $continents = [
     'Australia' => ['Ornithorhynchus anatinus', 'Tachyglossidae', 'Macropus rufus']
 ];
 echo '<pre>';
-$i=0;
 $z=0;
-$twoWords = [];
-$twoWordsMassive=[];
+$firstWords=[];
+$secondWords=[];
 $oneWordMassive=[];
+
 
 foreach ($continents as $key => $continent) {
     foreach ($continent as $animals) {
-        $twoWordsMassive[] = $animals;
         $oneWordMassive[$key][] = explode(' ', $animals);
     }
 }
