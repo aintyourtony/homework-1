@@ -1,6 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
+<br>
+    <?php
+
+    if (!empty($_FILES) || array_key_exists('test', $_FILES)) {
+    $testUpload = 'tests' . DIRECTORY_SEPARATOR . $_FILES['test']['name'];
+      move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
+      echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
+} else {
+    echo 'File is not uploaded';
+}
+
+?>
+
      <meta charset="UTF-8\r\n">
      <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -8,8 +21,8 @@
     <title>Make test great again</title>
 </head>
 <body>
-
-<form action="list.php" method="POST" enctype="multipart/form-data" >
+<br>
+<form action="admin.php" method="POST" enctype="multipart/form-data" >
 
     <div> Upload JSON FILE</div>
 
@@ -19,18 +32,8 @@
 
 
 </form>
+<br><hr>
+<a href="list.php">Перейти к списку загруженных файлов</a>
 
 </body>
 </html>
-
-<?php
-
-
-
-
-/**
- * Created by PhpStorm.
- * User: Tony
- * Date: 17.07.2018
- * Time: 12:18
- */

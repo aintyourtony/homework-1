@@ -1,18 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+             <title>Список файлов</title>
+</head>
+<body>
+
 <?php
-
-$testUpload = 'W:\home\maked-tester.pro\www' . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . $_FILES['test']['name'];
-
-if (!empty($_FILES) || array_key_exists('test', $_FILES)) {
-      move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
-      echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
-} else {
-    echo 'File is not uploaded';
-}
-
-$json = file_get_contents($_FILES['test']['name']);
-
-json_decode($json, true);
-
 
 echo '<br>' . '<b>The list of uploaded files:</b>' . '<br>';
 
@@ -21,6 +18,14 @@ $list = glob('tests/*.json');
 $i=1;
 
 foreach($list as $files) {
-    echo $i++ . '.' . ' ' . substr($files,6) . ' zhmupsi' . '</br>';
-}
+    $text= 'test.php' . '?q=' . substr($files,6);
 
+    echo $i++ . ') ' . '<a ' . 'href=' . "'$text'" . '>' . substr($files,6) . '</a>' . '<br>';
+}
+?>
+
+<br><hr>
+<a href='admin.php'>Загрузить файлы</a><br>
+
+</body>
+</html>
