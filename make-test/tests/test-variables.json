@@ -2,12 +2,12 @@
   "legend": "How many types of data can be in PHP?",
   "q1": "8",
   "q2": "4",
-  "q4": "10",
-  "q3": "12"
+  "q3": "10",
+  "q4": "12"
 }, {
   "legend": "How many superglobal variables in PHP?",
   "q1": "7",
-  "q4": "9",
-  "q2": "11",
-  "q3": "5"
+  "q2": "9",
+  "q3": "11",
+  "q4": "5"
 }]
