@@ -8,6 +8,7 @@
     $testUpload = 'tests' . DIRECTORY_SEPARATOR . $_FILES['test']['name'];
       move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
       echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
+      header('Location: list.php',true, 301);
 } else {
     echo 'File is not uploaded';
 }

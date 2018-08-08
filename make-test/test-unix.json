@@ -1,4 +1,15 @@
-[{    
-  "q1": "3",
-  "q2": "8"
-  }]
+[{
+  "legend": "When the UNIX era started?",
+  "q1": "1 january 1975 year",
+  "q2": "1 august 1970 year",
+  "q3": "1 january 1970 year",
+  "q4": "1 august 1975 year",
+  "a": "3"
+}, {
+  "legend": "Where does GET method transfer data?",
+  "q6": "In a special variable which you need to declare",
+  "q7": "In the HTML file",
+  "q8": "In the body tag",
+  "q9": "In the URL",
+  "b": "8"
+}]

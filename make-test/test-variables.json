@@ -1,4 +1,13 @@
 [{
-  "q1": "3",
-  "q2": "6"
+  "legend": "How many types of data can be in PHP?",
+  "q1": "8",
+  "q2": "4",
+  "q3": "10",
+  "q4": "12"
+}, {
+  "legend": "How many superglobal variables in PHP?",
+  "q1": "7",
+  "q2": "9",
+  "q3": "11",
+  "q4": "5"
 }]
