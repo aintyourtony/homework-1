@@ -1,10 +1,10 @@
 <?php
 $sum = [];
 $priceAndName = [];
+$csvName = 'pricelist.csv';
+var_dump($argv);
 
-if (count($argv)<=2 && !($argv[0] = '--today')) {
-    echo "Ошибка! Аргументы заданы не верно. Укажите флаг --today или запустите скрипт с аргументами {цена} и {описание покупки}";
-     } elseif ($argv[1] == '--today') {
+if ($argv[1] == '--today') {
     $csvName = 'pricelist.csv';
     $handle = fopen($csvName, "r");
     while (($fileOpen = fgetcsv($handle, '1000', ';')) !== FALSE) {
@@ -14,29 +14,28 @@ if (count($argv)<=2 && !($argv[0] = '--today')) {
             $sum[] = $fileOpen[1];
 
         }
-
     }
 
     echo date('Y-m-d') . ' Spendings ' . array_sum($sum);
+} elseif (isset($argv[1]) && isset($argv[2])) {
+
+    $filename = fopen($csvName, "a", LOCK_EX);
+
+    $price = implode(' ', array_slice($argv,1,1));
+
+    $name = implode(' ', array_slice($argv, 2));
+
+    array_push($priceAndName, $price, $name) ;
+
+    array_unshift($priceAndName, date('Y-m-d'));
+
+    fputcsv($filename,$priceAndName, ";");
+
+    $rowSign = implode(',',$priceAndName);
+
+    echo "Row added - $rowSign";
+
+    fclose($filename);
+} else  {
+    echo "Fail! Variables are not correct. Put '--today' or start script with such elements {price} and {item name}";
 }
-     else {
-         $filename = fopen('pricelist.csv', "a");
-
-         $price = implode(' ', array_slice($argv,1,1));
-
-         $name = implode(' ', array_slice($argv, 2));
-
-         array_push($priceAndName, $price, $name) ;
-
-         var_dump($priceAndName);
-
-         array_unshift($priceAndName, date('Y-m-d'));
-
-         fputcsv($filename,$priceAndName, ";");
-
-         $rowSign = implode(',',$priceAndName);
-
-         echo "Row added - $rowSign";
-
-         fclose($filename);
-    }
