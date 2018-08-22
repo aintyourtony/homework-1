@@ -8,8 +8,6 @@ $continents = [
 ];
 echo '<pre>';
 $i = 0;
-$z = 0;
-$x = 0;
 $firstWords=[];
 $secondWords=[];
 $oneWordMassive=[];
