@@ -28,18 +28,11 @@ foreach ($oneWordMassive as $continent => $firstwords) {
         }
     }
 }
-
-print_r($firstWords);
-print_r($secondWords);
-
 foreach ($firstWords as $continent => $value) {
     foreach ($value as $values) {
         $twoWordsMassive[$continent][] = $values . ' ' .  $secondWords[$i++];
     }
 }
-
-print_r($twoWordsMassive);
-
 foreach ($twoWordsMassive as $continents => $firstWordAnimal) {
     echo '<h2>' . $continents . '</h2>';
     echo implode(',', $firstWordAnimal);
