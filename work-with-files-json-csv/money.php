@@ -14,7 +14,7 @@ if (isset($argv[1]) && isset($argv[2])) {
     fclose($handle);
 } elseif ($csvName !== FALSE && $argv[1] == '--today') {
     $csvName = 'pricelist.csv';
-    $resource = fopen($csvName, "r");
+    $handle = fopen($csvName, "r");
     while (($resource = fgetcsv($handle, '1000', ';')) !== FALSE) {
         if ($resource[0] === date('Y-m-d')) {
             $sum[] = $resource[1];
