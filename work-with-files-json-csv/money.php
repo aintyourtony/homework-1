@@ -3,21 +3,21 @@ $sum = [];
 $priceAndName = [];
 $csvName = 'pricelist.csv';
 if (isset($argv[1]) && isset($argv[2])) {
-    $filename = fopen($csvName, "a", LOCK_EX);
+    $handle = fopen($csvName, "a");
     $price = implode(' ', array_slice($argv,1,1));
     $name = implode(' ', array_slice($argv, 2));
     array_push($priceAndName, $price, $name) ;
     array_unshift($priceAndName, date('Y-m-d'));
-    fputcsv($filename,$priceAndName, ";");
+    fputcsv($handle,$priceAndName, ";");
     $rowSign = implode(',',$priceAndName);
     echo "Row added - $rowSign";
-    fclose($filename);
+    fclose($handle);
 } elseif ($csvName !== FALSE && $argv[1] == '--today') {
     $csvName = 'pricelist.csv';
-    $handle = fopen($csvName, "r");
-    while (($fileOpen = fgetcsv($handle, '1000', ';')) !== FALSE) {
-        if ($fileOpen[0] === date('Y-m-d')) {
-            $sum[] = $fileOpen[1];
+    $resource = fopen($csvName, "r");
+    while (($resource = fgetcsv($handle, '1000', ';')) !== FALSE) {
+        if ($resource[0] === date('Y-m-d')) {
+            $sum[] = $resource[1];
         }
     }
     echo date('Y-m-d') . ' Spendings ' . array_sum($sum);
