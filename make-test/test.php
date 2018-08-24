@@ -12,33 +12,29 @@
     $x=1;
 
         if (!empty($_GET)) {
-        $q = $_GET['q'];
-        $filename = 'tests' . DIRECTORY_SEPARATOR . $q;
-        $get = file_get_contents($filename) or exit(http_response_code(404));
-        $json = json_decode($get,true) or exit('Can\'t decode');
-        //var_dump($json);
-
-    }
-
-
-    echo '<pre>';
-
-    ?>
+            $q = $_GET['q'];
+            $filename = 'tests' . DIRECTORY_SEPARATOR . $q;
+            $get = file_get_contents($filename) or exit(http_response_code(404));
+            $json = json_decode($get, true) or exit('Can\'t decode');
+            echo '<pre>';
+            ?>
 
 </head>
 <body>
 
-<form action="test.php" method="POST">
-    <?php if (!empty($_GET)) { foreach ($json as $item) { $i++; ?>
-    <fieldset>
 
-        <legend><?= $item['legend']; array_shift($item);?></legend>
-    <?php for ($y=0; $y < count($item); $y++) {?>
-        <label><input type="radio" name="<?='q' . $i;?>" value="<?=$z++?>"><?= $item['q' . $x++] ?> </label><br>
+<form action="test.php" method="POST">
+    <?php if (isset($_GET['q'])) { foreach ($json as $answers) { $i++;?>
+    <fieldset>
+        <legend><?= $json['legend'];?></legend>
+           <? for ($y=0; $y < count($answers); $y++) {{?>
+        <label><input type="radio" name="<?='q' . $i;?>" value="<?=$z++?>"><?= $answers['q' . $x++]?> </label><br>
     <?php }?>
+
     </fieldset>
+
     <?php }?>
-    <?php }   $testName = $_GET['q'];?>
+    <?php $testName = $_GET['q'];?>
         <input type="hidden" value="<?=$testName?>" name="test">
         <input type="text" name="certificate">
     <input type="submit" value="Check">
@@ -46,10 +42,6 @@
 </form>
 
 <?php
-
-
-
-
 
 if (!empty($_POST)) {
     $answ=[];
@@ -72,8 +64,6 @@ foreach ($jsonAnswers as $answ) {
     else {
         echo 'Вы ошиблись, попробуйте ещё!' . '<br>' . '<hr>';
     }
-}
-
 
 ?>
 <br>
