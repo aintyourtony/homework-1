@@ -59,9 +59,15 @@ if (!empty($_POST)) {
 
         echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
 
-
+var_dump($_POST);
     if ($_POST['q2'] == $jsonAnswers['correct']) {
-        echo '<b>' . 'Вы ответили верно!' . '</b>' . '<hr>';
+        echo '<b>' . 'Вы ответили верно!' . $_POST['certificate'] . '</b>' . '<br>';
+        header('content-type: image/png');
+        $img = imagecreatetruecolor ( 300, 200 );
+        $text_color = imagecolorallocate($img, 233, 14, 91);
+        imagestring($img, 1, 5, 5, $_POST['certificate'], $text_color);
+        imagepng($img);
+        echo '<hr>';
     } else {
         echo 'Вы ошиблись, попробуйте ещё!' . '<br>' . '<hr>';
     }
