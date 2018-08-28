@@ -2,6 +2,7 @@
 $sum = [];
 $priceAndName = [];
 $csvName = 'pricelist.csv';
+
 if (isset($argv[1]) && isset($argv[2])) {
     $handle = fopen($csvName, "a");
     $price = implode(' ', array_slice($argv,1,1));
@@ -12,7 +13,7 @@ if (isset($argv[1]) && isset($argv[2])) {
     $rowSign = implode(',',$priceAndName);
     echo "Row added - $rowSign";
     fclose($handle);
-} elseif (is_readable($csvName) && $argv[1] == '--today') {
+} elseif (is_readable($csvName) && isset($argv[1]) && $argv[1] == '--today') {
     $handle = fopen($csvName, "r");
     while (($resource = fgetcsv($handle, '1000', ';')) !== FALSE) {
         if ($resource[0] === date('Y-m-d')) {
