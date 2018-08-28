@@ -1,13 +1,17 @@
 [{
-  "legend": "When the UNIX era started?",
-  "q1": "1 january 1975 year",
-  "q2": "1 august 1970 year",
-  "q3": "1 january 1970 year",
-  "q4": "1 august 1975 year"
-}, {
-  "legend": "Where does GET method transfer data?",
-  "q1": "In a special variable which you need to declare",
-  "q2": "In the HTML file",
-  "q3": "In the body tag",
-  "q4": "In the URL"
+	"legend": "When the UNIX era started?",
+	"answers": [{
+			"q1": "1 january 1975 year"
+		},
+		{
+			"q2": "1 august 1970 year"
+		},
+		{
+			"q3": "1 january 1970 year"
+		},
+		{
+			"q4": "1 august 1975 year"
+		}
+	],
+	"correct": "q3"
 }]

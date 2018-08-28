@@ -16,55 +16,56 @@
             $filename = 'tests' . DIRECTORY_SEPARATOR . $q;
             $get = file_get_contents($filename) or exit(http_response_code(404));
             $json = json_decode($get, true) or exit('Can\'t decode');
-            echo '<pre>';
+        }
             ?>
+
+
 
 </head>
 <body>
-
-
 <form action="test.php" method="POST">
-    <?php if (isset($_GET['q'])) { foreach ($json as $answers) { $i++;?>
-    <fieldset>
-        <legend><?= $json['legend'];?></legend>
-           <? for ($y=0; $y < count($answers); $y++) {{?>
-        <label><input type="radio" name="<?='q' . $i;?>" value="<?=$z++?>"><?= $answers['q' . $x++]?> </label><br>
-    <?php }?>
 
+    <fieldset>
+        <?php if (!empty($_GET)) {?>
+
+        <legend><?php echo $json['legend'];?></legend>
+
+        <?php foreach ($json as $structure) { $i++; ?>
+            <?php if (is_array($structure)) { foreach ($structure as $answers) {?>
+        <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $answers['q' . $x++]?></label><br>
+            <?php } ?>
+        <?php } ?>
+        <?php } ?>
     </fieldset>
 
-    <?php }?>
     <?php $testName = $_GET['q'];?>
-        <input type="hidden" value="<?=$testName?>" name="test">
-        <input type="text" name="certificate">
+    <label> <input type="hidden" value="<?=$testName?>" name="test"></label>
+    <label> <input type="text" name="certificate"></label>
     <input type="submit" value="Check">
-
+    <?php } ?>
 </form>
 
 <?php
 
 if (!empty($_POST)) {
-    $answ=[];
+    $answ = [];
     $answers = $_POST['test'];
     $getAnswers = file_get_contents($answers) or exit('Ne poluchaetsya');
-    $jsonAnswers = json_decode($getAnswers,true) or exit('Can\'t decode');
+    $jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
     $certificate = $_POST['certificate'];
-    if(strlen($certificate)=="0") {
+    if (strlen($certificate) == "0") {
         echo "Заполните поле 'Ваше имя'<br>";
-    } else {
-        header('Content-type: image/png');
-        create_img($certificate);
-    }
-foreach ($jsonAnswers as $answ) {
-    echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
-}
-    if ($_POST['q1'] == $answ['q1'] && $_POST['q2'] == $answ['q2']) {
-        echo '<b>' . 'Вы ответили верно на все вопросы' . '</b>' . '<hr>';
-    }
-    else {
-        echo 'Вы ошиблись, попробуйте ещё!' . '<br>' . '<hr>';
     }
 
+        echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
+
+
+    if ($_POST['q2'] == $jsonAnswers['correct']) {
+        echo '<b>' . 'Вы ответили верно!' . '</b>' . '<hr>';
+    } else {
+        echo 'Вы ошиблись, попробуйте ещё!' . '<br>' . '<hr>';
+    }
+}
 ?>
 <br>
 <a href='admin.php'>Загрузить файлы</a><br>
