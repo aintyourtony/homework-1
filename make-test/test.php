@@ -10,12 +10,14 @@
     $i=0;
     $z=1;
     $x=1;
+    $y=1;
 
         if (!empty($_GET)) {
             $q = $_GET['q'];
             $filename = 'tests' . DIRECTORY_SEPARATOR . $q;
             $get = file_get_contents($filename) or exit(http_response_code(404));
             $json = json_decode($get, true) or exit('Can\'t decode');
+            
         }
             ?>
 
@@ -26,23 +28,25 @@
 <form action="test.php" method="POST">
 
     <fieldset>
-        <?php if (!empty($_GET)) {?>
+        <?php if (!empty($_GET)) { foreach ($json as $info) { $i++;?>
+            <?php if (is_array($info)) { ?>
+        <legend><?php echo $json['legend-' . $y++];?></legend>
 
-        <legend><?php echo $json['legend'];?></legend>
-
-        <?php foreach ($json as $structure) { $i++; ?>
-            <?php if (is_array($structure)) { foreach ($structure as $answers) {?>
+        <?php foreach ($info as $answers) {  ?>
+            <?php if (is_array($answers)) { ?>
         <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $answers['q' . $x++]?></label><br>
             <?php } ?>
         <?php } ?>
         <?php } ?>
-    </fieldset>
+        <?php } ?>
 
+    </fieldset>
+    <?php } ?>
     <?php $testName = $_GET['q'];?>
     <label> <input type="hidden" value="<?=$testName?>" name="test"></label>
     <label> <input type="text" name="certificate"></label>
     <input type="submit" value="Check">
-    <?php } ?>
+
 </form>
 
 <?php
@@ -59,7 +63,6 @@ if (!empty($_POST)) {
 
         echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
 
-var_dump($_POST);
     if ($_POST['q2'] == $jsonAnswers['correct']) {
         echo '<b>' . 'Вы ответили верно!' . $_POST['certificate'] . '</b>' . '<br>';
         header('content-type: image/png');

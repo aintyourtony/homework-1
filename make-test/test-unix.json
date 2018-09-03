@@ -1,6 +1,6 @@
 {
-	"legend": "When the UNIX era started?",
-	"answers": [{
+	"legend-1": "When the UNIX era started?",
+	"answers-1": [{
 			"q1": "1 january 1975 year"
 		},
 		{
@@ -13,5 +13,20 @@
 			"q4": "1 august 1975 year"
 		}
 	],
-	"correct": "q3"
+	"correct-1": "q3",
+	"legend-2": "When the ARA era started?",
+	"answers-2": [{
+			"q5": "1 january 1975 year"
+		},
+		{
+			"q6": "1 august 1970 year"
+		},
+		{
+			"q7": "1 january 1970 year"
+		},
+		{
+			"q8": "1 august 1975 year"
+		}
+	],
+	"correct-2": "q5"
 }
