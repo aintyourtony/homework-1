@@ -5,11 +5,12 @@
     <?php
 
     if (!empty($_FILES) || array_key_exists('test', $_FILES)) {
-    $testUpload = 'tests' . DIRECTORY_SEPARATOR . $_FILES['test']['name'];
-      move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
-      echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
-      header('Location: list.php',true, 301);
-} else {
+        header('Location: list.php',true, 301);
+        $testUpload = 'tests' . DIRECTORY_SEPARATOR . $_FILES['test']['name'];
+        move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
+        echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
+        exit;
+    } else {
     echo 'File is not uploaded';
 }
 
