@@ -11,6 +11,11 @@
     $z=1;
     $x=1;
     $y=1;
+    $a=2;
+    $s=1;
+    $j=1;
+    $q=0;
+    $summ=0;
 
     if (!empty($_GET)) {
         $q = $_GET['q'];
@@ -20,6 +25,7 @@
             http_response_code(404);
             exit;
         }
+
         $json = json_decode($get, true) or exit('Can\'t decode');
 
     }
@@ -51,33 +57,34 @@
     <input type="submit" value="Check">
 
 </form>
-
 <?php
 if (!empty($_POST)) {
-    print_r($_POST);
-    $answ = [];
-    $answers = $_POST['test'];
-    $getAnswers = file_get_contents('tests' . DIRECTORY_SEPARATOR . $answers) or exit('Ne poluchaetsya');
-    $jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
-    $certificate = $_POST['certificate'];
-    if (strlen($certificate) == "0") {
-        echo "Заполните поле 'Ваше имя'<br>";
-    }
-    echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
-    if ($_POST['q2'] == $jsonAnswers['correct-1'] && $_POST['q5'] == $jsonAnswers['correct-2']) {
-        echo '<b>' . 'Вы ответили верно!' . $_POST['certificate'] . '</b>' . '<br>';
-        header('content-type: image/png');
-        $img = imagecreatetruecolor ( 300, 200 );
-        $text_color = imagecolorallocate($img, 233, 14, 91);
-        imagestring($img, 1, 5, 5, $_POST['certificate'], $text_color);
-        imagepng($img);
-        echo '<hr>';
-    } else {
-        echo 'Вы ошиблись, попробуйте ещё!' . '<br>' . '<hr>';
-    }
+    var_dump($_POST);
+print_r(count($_POST));
+$answ = [];
+$answers = $_POST['test'];
+$getAnswers = file_get_contents('tests' . DIRECTORY_SEPARATOR . $answers) or exit('Ne poluchaetsya');
+$jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
+$certificate = $_POST['certificate'];
+if (strlen($certificate) == "0") {
+echo "Заполните поле 'Ваше имя'<br>";
+}
+echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
+for ($s=1;$s<count($_POST);$s++) {
+    $a=$a+3;
+    $q++;
+    for ($j=1;$j<count($_POST);$j++) {
+if ($_POST['q' . $a] == $jsonAnswers['correct-' . $q]) {
+$summ++;
+}
+
+}
+
+}
+echo "У вас $summ правильных ответов";
 }
 ?>
-<br>
+<hr>
 <a href='admin.php'>Загрузить файлы</a><br>
 <a href="list.php">Перейти к списку загруженных файлов</a>
 </body>
