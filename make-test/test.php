@@ -14,7 +14,7 @@
     $a=2;
     $s=1;
     $j=1;
-    $q=0;
+    $q=1;
     $summ=0;
 
     if (!empty($_GET)) {
@@ -51,37 +51,38 @@
 
     </fieldset>
     <?php } ?>
+        <label> <input type="hidden" value="<?=$q?>" name="test"></label>
+        <label> <input type="text" name="certificate"></label>
+        <input type="submit" value="Check">
     <?php } ?>
-    <label> <input type="hidden" value="<?=$q?>" name="test"></label>
-    <label> <input type="text" name="certificate"></label>
-    <input type="submit" value="Check">
+
 
 </form>
 <?php
 if (!empty($_POST)) {
-    var_dump($_POST);
-print_r(count($_POST));
+    echo '<pre>';
+
 $answ = [];
 $answers = $_POST['test'];
 $getAnswers = file_get_contents('tests' . DIRECTORY_SEPARATOR . $answers) or exit('Ne poluchaetsya');
 $jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
 $certificate = $_POST['certificate'];
+
 if (strlen($certificate) == "0") {
 echo "Заполните поле 'Ваше имя'<br>";
-}
+} else {
 echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
-for ($s=1;$s<count($_POST);$s++) {
-    $a=$a+3;
-    $q++;
-    for ($j=1;$j<count($_POST);$j++) {
-if ($_POST['q' . $a] == $jsonAnswers['correct-' . $q]) {
+
+foreach ($_POST as $value) {
+
+    if ($value == $jsonAnswers['correct-' . $q++]) {
 $summ++;
 }
-
+}
+    echo "У вас $summ правильных ответов";
+echo '<img src="img.php">';
 }
 
-}
-echo "У вас $summ правильных ответов";
 }
 ?>
 <hr>

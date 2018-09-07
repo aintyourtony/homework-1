@@ -1,0 +1,47 @@
+{
+	"legend-1": "When the UNIX era started?",
+	"answers-1": [{
+			"q1": "1 january 1975 year"
+		},
+		{
+			"q2": "1 august 1970 year"
+		},
+		{
+			"q3": "1 january 1970 year"
+		},
+		{
+			"q4": "1 august 1975 year"
+		}
+	],
+	"correct-1": "q3",
+	"legend-2": "When the ARA era started?",
+	"answers-2": [{
+			"q5": "1 january 1975 year"
+		},
+		{
+			"q6": "1 august 1970 year"
+		},
+		{
+			"q7": "1 january 1970 year"
+		},
+		{
+			"q8": "1 august 1975 year"
+		}
+	],
+	"correct-2": "q5",
+	"legend-3": "When the ARA era started?",
+	"answers-3": [{
+			"q9": "1 january 1975 year"
+		},
+		{
+			"q10": "1 august 1970 year"
+		},
+		{
+			"q11": "1 january 1970 year"
+		},
+		{
+			"q12": "1 august 1975 year"
+		}
+	],
+	"correct-3": "q11"
+}
