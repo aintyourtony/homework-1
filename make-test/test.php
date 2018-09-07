@@ -58,6 +58,7 @@
 
 
 </form>
+
 <?php
 if (!empty($_POST)) {
     echo '<pre>';
@@ -79,8 +80,8 @@ foreach ($_POST as $value) {
 $summ++;
 }
 }
-    echo "У вас $summ правильных ответов";
-echo '<img src="img.php">';
+echo "Количество правильных ответов: " . '<b>' . $summ . '</b>'; echo '<br>';
+echo "<img src=img.php?name=$certificate&mark=$summ>";
 }
 
 }
