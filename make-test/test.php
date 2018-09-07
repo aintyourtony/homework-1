@@ -10,9 +10,8 @@
     $i=0;
     $z=1;
     $x=1;
-    $y=1;
-    $q=1;
     $summ=0;
+    $correct=[];
 
     if (!empty($_GET)) {
         $q = $_GET['q'];
@@ -24,6 +23,7 @@
         }
 
         $json = json_decode($get, true) or exit('Can\'t decode');
+
 
     }
     ?>
@@ -37,14 +37,15 @@
     <fieldset>
 
 
-                <legend><?php echo $json['legend-' . $y++];?></legend>
+                <legend><?php echo $info['question'];?></legend>
 
                 <?php foreach ($info as $answers) {  ?>
-                    <?php if (is_array($answers)) { ?>
-                        <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $answers['q' . $x++]?></label><br>
-                    <?php } ?>
-                <?php } ?>
-            <?php } ?>
+                   <?php if (is_array($answers)) { ?>
+                   <?php foreach ($answers as $answer) { ?>
+                        <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $answer['q' . $x++]; ?></label><br>
+
+                    <?php } $x=1; $z=1;?>
+                   <?php }}} ?>
 
     </fieldset>
     <?php } ?>
@@ -58,24 +59,27 @@
 
 <?php
 if (!empty($_POST)) {
-    echo '<pre>';
-
+print_r($_POST);
 $answ = [];
 $answers = $_POST['test'];
 $getAnswers = file_get_contents('tests' . DIRECTORY_SEPARATOR . $answers) or exit('Ne poluchaetsya');
 $jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
 $certificate = $_POST['certificate'];
-
+echo '<pre>';
+print_r($_POST);
 if (strlen($certificate) == "0") {
 echo "Заполните поле 'Ваше имя'<br>";
 } else {
 echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
+$a=1;
+foreach ($jsonAnswers as $correct) {
 
-foreach ($_POST as $value) {
+        if ($_POST['q' . $a++] == ($correct['correct'])) {
+            $summ++;
 
-    if ($value == $jsonAnswers['correct-' . $q++]) {
-$summ++;
-}
+    } else {
+            echo 'Ответьте на все вопросы!';
+        }
 }
 echo "Количество правильных ответов: " . '<b>' . $summ . '</b>'; echo '<br>';
 echo "<img src=img.php?name=$certificate&mark=$summ>";
