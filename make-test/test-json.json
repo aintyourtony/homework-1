@@ -14,7 +14,7 @@
 				"q4": "1 august 1975 year"
 			}
 		],
-		"correct": "q3"
+		"correct": "1 january 1970 year"
 	},
 	{
 		"question": "How many types of data can be in PHP?",
@@ -31,7 +31,7 @@
 				"q4": "12"
 			}
 		],
-		"correct": "q3"
+		"correct": "10"
 
 	}
 ]

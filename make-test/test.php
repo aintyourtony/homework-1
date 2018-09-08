@@ -9,7 +9,8 @@
     <?php
     $i=0;
     $z=1;
-    $x=1;
+    $x=0;
+    $p=1;
     $summ=0;
     $correct=[];
 
@@ -32,25 +33,18 @@
 <body>
 <form action="test.php" method="POST">
 
-    <?php if (!empty($_GET)) { foreach ($json as $info) { $i++;?>
-<?php if (is_array($info)) { ?>
+    <?php if (!empty($_GET)) { foreach ($json as $info) { ?>
+
     <fieldset>
 
-
-                <legend><?php echo $info['question'];?></legend>
-
-                <?php foreach ($info as $answers) {  ?>
-                   <?php if (is_array($answers)) { ?>
-                   <?php foreach ($answers as $answer) { ?>
-                        <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $answer['q' . $x++]; ?></label><br>
-
-                    <?php } $x=1; $z=1;?>
-                   <?php }}} ?>
-
+        <legend><?php echo $info['question']; ?></legend>
+<?php for($q=0;$q<count($info['answers']);$q++) { ?>
+            <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $info['answers'][$q++]['q' . $q]; ?></label><br>
+<?php } ?>
     </fieldset>
     <?php } ?>
         <label> <input type="hidden" value="<?=$q?>" name="test"></label>
-        <label> <input type="text" name="certificate"></label>
+        <label> <input required type="text" name="certificate"></label>
         <input type="submit" value="Check">
     <?php } ?>
 
