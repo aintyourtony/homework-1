@@ -10,7 +10,8 @@
     $i=0;
     $z=1;
     $x=0;
-    $p=1;
+    $y=1;
+
     $summ=0;
     $correct=[];
 
@@ -38,9 +39,9 @@
     <fieldset>
 
         <legend><?php echo $info['question']; ?></legend>
-<?php for($q=0;$q<count($info['answers']);$q++) { ?>
-            <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $info['answers'][$q++]['q' . $q]; ?></label><br>
-<?php } ?>
+<?php foreach ($info as $question) {?>
+            <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $question[$x++]['q' . $y++];?></label><br>
+<?php }$x=0;$y=1;$z=1;?>
     </fieldset>
     <?php } ?>
         <label> <input type="hidden" value="<?=$q?>" name="test"></label>
