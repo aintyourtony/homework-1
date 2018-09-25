@@ -11,6 +11,7 @@
     $z=1;
     $x=0;
     $y=1;
+    $main=0;
 
     $summ=0;
     $correct=[];
@@ -34,14 +35,14 @@
 <body>
 <form action="test.php" method="POST">
 
-    <?php if (!empty($_GET)) { foreach ($json as $info) { ?>
+    <?php if (!empty($_GET)) { foreach ($json as $key => $info) { ; ?>
 
     <fieldset>
 
         <legend><?php echo $info['question']; ?></legend>
-<?php foreach ($info as $question) {?>
-            <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $question[$x++]['q' . $y++];?></label><br>
-<?php }$x=0;$y=1;$z=1;?>
+            <?php foreach ($info as $ques) { ?>
+                <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $json[$i]['answers'][$x++]['q' . $y++]; ?></label><br>
+            <?php } $i++; $x=0; $y=1; $z=1;?>
     </fieldset>
     <?php } ?>
         <label> <input type="hidden" value="<?=$q?>" name="test"></label>
