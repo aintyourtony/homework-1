@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test</title>
     <?php
-    $i=0;
-    $z=1;
+
+    //$z=1;
     $x=0;
     $y=1;
     $main=0;
@@ -35,14 +35,14 @@
 <body>
 <form action="test.php" method="POST">
 
-    <?php if (!empty($_GET)) { foreach ($json as $key => $info) { ; ?>
+    <?php if (!empty($_GET)) { foreach ($json as $key => $info) { ?>
 
     <fieldset>
 
         <legend><?php echo $info['question']; ?></legend>
-            <?php foreach ($info as $ques) { ?>
-                <label><input type="radio" name="<?php echo 'q' . $i; ?>" value="<?php echo 'q' . $z++;?>"><?php echo $json[$i]['answers'][$x++]['q' . $y++]; ?></label><br>
-            <?php } $i++; $x=0; $y=1; $z=1;?>
+            <?php foreach ($info['answers'] as $ques) { $z = $json[$key]['answers'][$x++]['q' . $y++]; ?>
+                <label><input type="radio" name="<?php echo 'q' . $key; ?>" value="<?php echo $z; ?>" required><?php echo $z; ?></label><br>
+            <?php } $x=0; $y=1; $z=1;?>
     </fieldset>
     <?php } ?>
         <label> <input type="hidden" value="<?=$q?>" name="test"></label>
@@ -54,34 +54,38 @@
 </form>
 
 <?php
+$mark=0;
 if (!empty($_POST)) {
-print_r($_POST);
 $answ = [];
 $answers = $_POST['test'];
 $getAnswers = file_get_contents('tests' . DIRECTORY_SEPARATOR . $answers) or exit('Ne poluchaetsya');
 $jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
 $certificate = $_POST['certificate'];
-echo '<pre>';
-print_r($_POST);
-if (strlen($certificate) == "0") {
-echo "Заполните поле 'Ваше имя'<br>";
-} else {
-echo '<h3>' . 'Результаты:' . '</h3>' . '<br>';
-$a=1;
-foreach ($jsonAnswers as $correct) {
+echo '<h3>' . 'Результаты:' . '</h3>';
+$a=0;
+foreach ($jsonAnswers as $countQues => $correct) {;
 
         if ($_POST['q' . $a++] == ($correct['correct'])) {
             $summ++;
 
-    } else {
-            echo 'Ответьте на все вопросы!';
-        }
+    }
 }
-echo "Количество правильных ответов: " . '<b>' . $summ . '</b>'; echo '<br>';
-echo "<img src=img.php?name=$certificate&mark=$summ>";
+    if ($summ == 0 || $a/$summ > 5) {
+        $mark = 2;
+    }
+elseif ($a/$summ == 1) {
+        $mark = 5;
+} elseif ($a/$summ > 1 && $a/$summ <= 2) {
+        $mark = 4;
+} elseif ($a/$summ > 2 && $a/$summ <= 5) {
+        $mark = 3;
 }
 
+ echo '<br>';
+
+echo "<img src=img.php?name=$certificate&mark=$mark&summ=$summ&a=$a>";
 }
+
 ?>
 <hr>
 <a href='admin.php'>Загрузить файлы</a><br>
