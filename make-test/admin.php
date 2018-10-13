@@ -1,19 +1,28 @@
-<!doctype html>
-<html lang="en">
-<head>
-<br>
-    <?php
+<?php
+require_once 'functions.php';
 
-    if (!empty($_FILES) || array_key_exists('test', $_FILES)) {
+if (isset($_SESSION['user']['username']) && $_SESSION['user']['username'] == 'Администратор') {
+    echo 'File is not uploaded';
+
+} else {
+    header('Location: index.php');
+    die;
+}
+
+if (!empty($_FILES) || array_key_exists('test', $_FILES)) {
     $testUpload = 'tests' . DIRECTORY_SEPARATOR . $_FILES['test']['name'];
-      move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
-      echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
-      header('Location: list.php',true, 301);
+    move_uploaded_file($_FILES['test']['tmp_name'], $testUpload);
+    echo 'File ' . '<b>' .  $_FILES['test']['name'] . '</b>' . ' is uploaded' . '<br>';
+    header('Location: list.php',true, 301);
 } else {
     echo 'File is not uploaded';
 }
 
 ?>
+
+<!doctype html>
+<html lang="en">
+<head>
 
      <meta charset="UTF-8\r\n">
      <meta name="viewport"

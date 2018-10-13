@@ -1,3 +1,34 @@
+<?php
+require_once 'functions.php';
+
+if (!isAuthorized() && empty($_GET)) {
+    header('Location: index.php');
+    die;
+}
+
+var_dump($_SESSION);
+$x=0;
+$y=1;
+$main=0;
+
+$summ=0;
+$correct=[];
+
+if (!empty($_GET)) {
+    $q = $_GET['q'];
+    $filename = 'tests' . DIRECTORY_SEPARATOR . $q;
+    $get = file_get_contents($filename);
+    if (!$get) {
+        http_response_code(404);
+        exit;
+    }
+
+    $json = json_decode($get, true) or exit('Can\'t decode');
+
+
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,31 +37,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test</title>
-    <?php
-
-    //$z=1;
-    $x=0;
-    $y=1;
-    $main=0;
-
-    $summ=0;
-    $correct=[];
-
-    if (!empty($_GET)) {
-        $q = $_GET['q'];
-        $filename = 'tests' . DIRECTORY_SEPARATOR . $q;
-        $get = file_get_contents($filename);
-        if (!$get) {
-            http_response_code(404);
-            exit;
-        }
-
-        $json = json_decode($get, true) or exit('Can\'t decode');
-
-
-    }
-    ?>
-
 </head>
 <body>
 <form action="test.php" method="POST">
@@ -40,14 +46,13 @@
     <fieldset>
 
         <legend><?php echo $info['question']; ?></legend>
-            <?php foreach ($info['answers'] as $ques) { $z = $json[$key]['answers'][$x++]['q' . $y++]; ?>
+            <?php foreach ($info['answers'] as $ques) { $z = $z = $ques['q' . $y++]; ?>
                 <label><input type="radio" name="<?php echo 'q' . $key; ?>" value="<?php echo $z; ?>" required><?php echo $z; ?></label><br>
             <?php } $x=0; $y=1; $z=1;?>
     </fieldset>
     <?php } ?>
         <label> <input type="hidden" value="<?=$q?>" name="test"></label>
-        <label> <input required type="text" name="certificate"></label>
-        <input type="submit" value="Check">
+        <input type="submit" value="Проверить результаты">
     <?php } ?>
 
 
@@ -60,7 +65,7 @@ $answ = [];
 $answers = $_POST['test'];
 $getAnswers = file_get_contents('tests' . DIRECTORY_SEPARATOR . $answers) or exit('Ne poluchaetsya');
 $jsonAnswers = json_decode($getAnswers, true) or exit('Can\'t decode');
-$certificate = $_POST['certificate'];
+$certificate = $_SESSION['name'];
 echo '<h3>' . 'Результаты:' . '</h3>';
 $a=0;
 foreach ($jsonAnswers as $countQues => $correct) {;
@@ -83,12 +88,16 @@ elseif ($a/$summ == 1) {
 
  echo '<br>';
 
-echo "<img src=img.php?name=$certificate&mark=$mark&summ=$summ&a=$a>";
+echo "<img src=img.php?mark=$mark&summ=$summ&a=$a>";
 }
 
 ?>
+<?php
+if (isset($_SESSION['user']['username']) && $_SESSION['user']['username'] == 'Администратор') {
+echo '<a href=' . 'admin.php' . '>' . 'Загрузить файлы' . '</a>' . '<br>';
+}
+?>
 <hr>
-<a href='admin.php'>Загрузить файлы</a><br>
 <a href="list.php">Перейти к списку загруженных файлов</a>
 </body>
 </html>
